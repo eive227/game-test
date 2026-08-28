@@ -1,4 +1,3 @@
-```python
 import asyncio
 import pygame
 import random
@@ -663,4 +662,3 @@ async def main():
 ####################################################################
 
 asyncio.run(main())
-```
