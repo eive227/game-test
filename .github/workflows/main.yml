@@ -39,6 +39,9 @@ jobs:
         run: |
           mkdir -p website
           cp -r build/* website/
+      
+          echo "=== LOADING ELEMENTS ==="
+          grep -i -E "loading|loader|progress" website/index.html || true
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
