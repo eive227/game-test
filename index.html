@@ -81,15 +81,15 @@
         justify-content: center;
         align-items: flex-start;
         /* Only pad when the window is taller than the game (0 in a tight iframe). */
-        padding-top: max(0px, min(24px, 100vh - 600px));
-        padding-top: max(0px, min(24px, 100dvh - 600px));
+        padding-top: max(0px, min(24px, 100vh - 640px));
+        padding-top: max(0px, min(24px, 100dvh - 640px));
         box-sizing: border-box;
       }
 
       .pygodide-shell,
       .pygodide-stage {
-        width: 800px;
-        height: 600px;
+        width: 960px;
+        height: 640px;
         flex-shrink: 0;
       }
       
@@ -457,8 +457,8 @@
         border: 0;
         background: #050814;
         
-        width: 800px;
-        height: 600px;
+        width: 960px;
+        height: 640px;
         
       }
     </style>
@@ -499,14 +499,14 @@
         <canvas
           id="canvas"
           data-canvas-layout="fixed"
-          width="800"
-          height="600"
+          width="960"
+          height="640"
           tabindex="0"
         ></canvas>
       </div>
     </main>
     <script src="https://cdn.jsdelivr.net/pyodide/v314.0.0/full/pyodide.js"></script>
     
-    <script type="module" src="./boot.js?v=ba3b908295c1"></script>
+    <script type="module" src="./boot.js?v=a276dbf27249"></script>
   </body>
 </html>
