@@ -28,12 +28,10 @@ jobs:
       - name: Build game (force correct CDN path)
         run: |
           set -x
-          python -m pygbag --build --ume_block=0 --cdn https://pygame-web.github.io/archives/0.9/ .
+          python -m pygbag --build --ume_block=0 --PYBUILD 3.12 --cdn https://pygame-web.github.io/archives/0.9/ .
           echo "---- build directory contents ----"
           find build -maxdepth 3 -type d
           ls -la build/web || echo "build/web does not exist"
-          echo "---- CDN references in built index.html ----"
-          grep -o 'https://pygame-web.github.io/[^"'"'"']*' build/web/index.html || true
 
       - name: Fail early if build output is missing
         run: |
