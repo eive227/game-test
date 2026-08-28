@@ -40,8 +40,19 @@ jobs:
           mkdir -p website
           cp -r build/* website/
       
-          echo "=== LOADING ELEMENTS ==="
-          grep -i -E "loading|loader|progress" website/index.html || true
+          python - <<'PY'
+          from pathlib import Path
+      
+          index = Path("website/index.html")
+          text = index.read_text()
+      
+          text = text.replace(
+              '<div id="pygodide-loader" data-state="active"',
+              '<div id="pygodide-loader" data-state="hidden"'
+          )
+      
+          index.write_text(text)
+          PY
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
