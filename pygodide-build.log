@@ -1,0 +1,32 @@
+Pygodide build log
+Started: 2026-08-28T12:11:00.940385+00:00
+Pygodide version: 0.1.0
+Python: 3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]
+Platform: Linux-6.17.0-1022-azure-x86_64-with-glibc2.39
+Working directory: /home/runner/work/game-test/game-test
+Source directory: /home/runner/work/game-test/game-test
+Output directory: /home/runner/work/game-test/game-test/build
+Serve after build: False
+CLI app override: (none)
+CLI dependencies: (none)
+CLI canvas-width: (none)
+CLI canvas-height: (none)
+Auto-async: True
+
+Build output:
+Building /home/runner/work/game-test/game-test
+App entrypoint: main:main (default)
+Canvas aspect: not found (using default 800x600; could not resolve set_mode size)
+Canvas: fixed 800x600 (as-is)
+Package files: 18 (auto-discovery)
+Dependency sources: none
+Resolved dependencies: none
+Install strategy:
+  - pyodide.loadPackage: (none)
+  - micropip.install: (none)
+Auto async: skipped main.py, could not parse Python source: invalid syntax (main.py, line 1). Make the entrypoint async and add await asyncio.sleep(1 / (60 * 2)) once per frame (see https://pyodide.org/en/stable/usage/sdl.html).
+App archive: app.zip (18 files)
+Favicon: bundled default
+
+Result: success
+Finished: 2026-08-28T12:11:00.975796+00:00
