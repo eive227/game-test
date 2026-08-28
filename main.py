@@ -169,34 +169,6 @@ def render_gui():
 
     return x, y, tile_size * 2
 
-
-def render_mobile_controls():
-    """
-    Draws touchscreen-friendly flag mode button.
-    """
-
-    button_width = tile_size * 5
-    button_height = tile_size * 1.5
-
-    x = screen_width / 2 - button_width / 2
-    y = screen_height - button_height - tile_size / 2
-
-    pygame.draw.rect(
-        screen,
-        (180, 180, 180),
-        (x, y, button_width, button_height)
-    )
-
-    pygame.draw.rect(
-        screen,
-        (40, 40, 40),
-        (x, y, button_width, button_height),
-        3
-    )
-
-    return x, y, button_width, button_height
-
-
 def render():
     screen.fill((0, 0, 0))
 
@@ -204,9 +176,7 @@ def render():
 
     render_play_grid()
 
-    mobile_button = render_mobile_controls()
-
-    return button, mobile_button
+    return button
 
 
 def camera_limits():
@@ -631,7 +601,7 @@ async def main():
 
         tick_timer(dt)
 
-        button, mobile_button = render()
+        button = render()
 
         mouse_position()
 
@@ -642,7 +612,6 @@ async def main():
             mouse_clicked,
             right_clicked,
             button,
-            mobile_button
         )
 
         check_win()
