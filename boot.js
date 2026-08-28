@@ -16,7 +16,7 @@ const canvasAspectHeight = 640;
 const pygodideVersion = "0.1.0";
 // Build-time fingerprint of the app archive. Same content → same URL → browser
 // cache can reuse the zip across reloads. Rebuild after edits to pick up changes.
-const assetRequestCacheBuster = "0b4622f93e47";
+const assetRequestCacheBuster = "aa3423e4247c";
 const knownImportPackageAliases = {
   pygame: "pygame-ce",
 };
