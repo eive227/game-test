@@ -27,8 +27,6 @@ screen = pygame.display.set_mode(
 
 pygame.display.set_caption("Minesweeper")
 
-font = pygame.font.Font("freesansbold.ttf", tile_size)
-
 offset_for_hud = screen_height // 5
 
 grid_length = int(screen_width // tile_size - 1)
@@ -156,30 +154,6 @@ def render_gui():
     y = cam_y - tile_size * 3.5
 
     screen.blit(tile[12], (x, y))
-
-    # Timer
-    x = cam_x + screen_width - tile_size * 4
-    y = cam_y - screen_height // 10
-
-    text = font.render(
-        str(math.floor(timer)),
-        True,
-        (255, 0, 0)
-    )
-
-    screen.blit(text, (x, y))
-
-    # Flags remaining
-    x = cam_x + tile_size * 2
-    y = cam_y - screen_height // 10
-
-    text = font.render(
-        str(flag_amount),
-        True,
-        (255, 0, 0)
-    )
-
-    screen.blit(text, (x, y))
 
     # Center button
     x = cam_x + screen_width / 2 - tile_size * 1.5
