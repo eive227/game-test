@@ -384,7 +384,7 @@ def reveal_tile(x, y):
         grid[tile_id] = bombs_at_point + 2
 
 
-def game_actions(keys, mouse_clicked, right_clicked, button, mobile_button):
+def game_actions(keys, mouse_clicked, right_clicked, button):
     global cam
     global tiles_to_check
     global checked_tiles
@@ -463,24 +463,6 @@ def game_actions(keys, mouse_clicked, right_clicked, button, mobile_button):
             make_grid()
 
             gamestate = "Playing"
-
-    ################################################################
-    # MOBILE FLAG MODE BUTTON
-
-    if (
-        mobile_button[0] < mouse_x <
-        mobile_button[0] + mobile_button[2]
-        and
-        mobile_button[1] < mouse_y <
-        mobile_button[1] + mobile_button[3]
-    ):
-
-        if mouse_clicked and not repeat[1]:
-
-            repeat[1] = True
-
-            flag_mode = not flag_mode
-
 
 def get_bombs_at_point(x, y):
 
