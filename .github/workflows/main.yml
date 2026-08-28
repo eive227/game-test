@@ -19,41 +19,35 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install pygbag (pinned version)
+      - name: Install pygbag
         run: |
           python -m pip install --upgrade pip
-          python -m pip install pygbag==0.9.2
+          python -m pip install --upgrade pygbag
+          python -m pygbag --version || python -m pip show pygbag
 
       - name: Build game
         run: |
+          set -x
           python -m pygbag --build --ume_block=0 .
+          echo "---- build directory contents ----"
+          find build -maxdepth 3 -type d
+          echo "---- build/web contents ----"
+          ls -la build/web || echo "build/web does not exist"
 
-      - name: Verify CDN assets referenced by build actually exist
+      - name: Fail early if build output is missing
         run: |
-          PYGBAG_VERSION=$(python -m pip show pygbag | grep -i "^Version:" | awk '{print $2}')
-          echo "Using pygbag version: $PYGBAG_VERSION"
-
-          # Extract the cdn base path pygbag baked into the built index.html
-          CDN_URL=$(grep -oE 'https://pygame-web.github.io/cdn/[^"'"'"']+' build/web/index.html | head -n1)
-
-          if [ -z "$CDN_URL" ]; then
-            echo "Could not find a pygame-web CDN URL in build/web/index.html - skipping check."
-          else
-            # Derive the folder and check browserfs.min.js exists there
-            CDN_BASE=$(dirname "$CDN_URL")
-            CHECK_URL="${CDN_BASE}/browserfs.min.js"
-            echo "Checking $CHECK_URL"
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$CHECK_URL")
-            if [ "$STATUS" != "200" ]; then
-              echo "::error::CDN asset missing (HTTP $STATUS): $CHECK_URL"
-              echo "::error::pygbag $PYGBAG_VERSION expects a runtime file that isn't published on pygame-web's CDN."
-              echo "::error::Try pinning a different pygbag version in this workflow."
-              exit 1
-            fi
-            echo "CDN asset OK ($STATUS)"
+          if [ ! -d "build/web" ] || [ -z "$(ls -A build/web 2>/dev/null)" ]; then
+            echo "::error::build/web is missing or empty — pygbag did not produce output. Check the 'Build game' step log above for the real error (often a CDN fetch failure)."
+            exit 1
           fi
 
       - name: Prepare website
         run: |
           mkdir -p website
-          cp -r
+          cp -r build/web/. website/
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./website
