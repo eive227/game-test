@@ -39,6 +39,14 @@ jobs:
         run: |
           mkdir -p website
           cp -r build/* website/
+      
+          cat >> website/index.html <<'HTML'
+          <style>
+            #pygodide-loader {
+              display: none !important;
+            }
+          </style>
+          HTML
 
 
       - name: Deploy to GitHub Pages
