@@ -19,21 +19,21 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install pygbag (pinned to last 0.8.x)
+      - name: Install pygbag (latest)
         run: |
           python -m pip install --upgrade pip
-          python -m pip install pygbag==0.8.6
+          python -m pip install --upgrade pygbag
           python -m pip show pygbag
 
-      - name: Build game
+      - name: Build game (force correct CDN path)
         run: |
           set -x
-          python -m pygbag --build --ume_block=0 .
+          python -m pygbag --build --ume_block=0 --cdn https://pygame-web.github.io/archives/0.9/ .
           echo "---- build directory contents ----"
           find build -maxdepth 3 -type d
           ls -la build/web || echo "build/web does not exist"
           echo "---- CDN references in built index.html ----"
-          grep -o 'https://pygame-web.github.io/cdn/[^"'"'"']*' build/web/index.html || true
+          grep -o 'https://pygame-web.github.io/[^"'"'"']*' build/web/index.html || true
 
       - name: Fail early if build output is missing
         run: |
