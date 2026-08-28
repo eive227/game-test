@@ -1,5 +1,5 @@
 Pygodide build log
-Started: 2026-08-28T12:13:14.225167+00:00
+Started: 2026-08-28T12:15:29.563347+00:00
 Pygodide version: 0.1.0
 Python: 3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]
 Platform: Linux-6.17.0-1022-azure-x86_64-with-glibc2.39
@@ -19,10 +19,11 @@ App entrypoint: main:main (default)
 Canvas aspect: found 960x640 in main.py
 Canvas: fixed 960x640 (as-is)
 Package files: 18 (auto-discovery)
-Dependency sources: none
-Resolved dependencies: none
+Dependency sources:
+  - [project].dependencies: pygame-ce
+Resolved dependencies: pygame-ce
 Install strategy:
-  - pyodide.loadPackage: (none)
+  - pyodide.loadPackage: pygame-ce
   - micropip.install: (none)
 Auto async: already async (main:main)
 Pygodide warning: module-level asyncio.run() executes during import in the browser and breaks startup. Move it under if __name__ == "__main__": for local runs only.
@@ -30,4 +31,4 @@ App archive: app.zip (18 files)
 Favicon: bundled default
 
 Result: success
-Finished: 2026-08-28T12:13:14.287359+00:00
+Finished: 2026-08-28T12:15:29.609817+00:00

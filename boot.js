@@ -1,9 +1,9 @@
 const status = document.getElementById("status");
 const canvas = document.getElementById("canvas");
 
-const pyodidePackages = [];
+const pyodidePackages = ["pygame-ce"];
 const micropipPackages = [];
-const declaredPackageNames = [];
+const declaredPackageNames = ["pygame-ce"];
 // Single compressed archive of game code + assets (build-time app.zip).
 const appArchivePath = "app.zip";
 const assetBasePath = "./";
@@ -16,7 +16,7 @@ const canvasAspectHeight = 640;
 const pygodideVersion = "0.1.0";
 // Build-time fingerprint of the app archive. Same content → same URL → browser
 // cache can reuse the zip across reloads. Rebuild after edits to pick up changes.
-const assetRequestCacheBuster = "35415de0a71e";
+const assetRequestCacheBuster = "0397ac0bc646";
 const knownImportPackageAliases = {
   pygame: "pygame-ce",
 };
