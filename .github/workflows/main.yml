@@ -1,3 +1,4 @@
+```yaml
 name: Build Pygame Web Game
 
 on:
