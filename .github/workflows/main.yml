@@ -40,19 +40,42 @@ jobs:
           mkdir -p website
           cp -r build/* website/
       
-          python - <<'PY'
-          from pathlib import Path
+          cat >> website/index.html <<'HTML'
+          <script>
+          (function() {
+              function hideLoader() {
+                  const loader = document.getElementById("pygodide-loader");
+                  if (loader) {
+                      loader.setAttribute("data-state", "hidden");
+                      loader.style.display = "none";
+                      loader.style.visibility = "hidden";
+                      loader.style.pointerEvents = "none";
+                  }
+              }
       
-          index = Path("website/index.html")
-          text = index.read_text()
+              // Hide it shortly after the page starts.
+              setTimeout(hideLoader, 3000);
       
-          text = text.replace(
-              '<div id="pygodide-loader" data-state="active"',
-              '<div id="pygodide-loader" data-state="hidden"'
-          )
+              // Also watch for pygodide changing its state.
+              const observer = new MutationObserver(hideLoader);
       
-          index.write_text(text)
-          PY
+              function startObserver() {
+                  const loader = document.getElementById("pygodide-loader");
+                  if (loader) {
+                      observer.observe(loader, {
+                          attributes: true,
+                          attributeFilter: ["data-state"]
+                      });
+                      hideLoader();
+                  } else {
+                      setTimeout(startObserver, 100);
+                  }
+              }
+      
+              startObserver();
+          })();
+          </script>
+          HTML
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
