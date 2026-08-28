@@ -173,9 +173,7 @@ def render_gui():
 
 def render_mobile_controls():
     """
-    Draws touchscreen-friendly controls.
-
-    The flag button is intentionally outside the main grid area.
+    Draws touchscreen-friendly flag mode button.
     """
 
     button_width = tile_size * 5
@@ -184,7 +182,6 @@ def render_mobile_controls():
     x = screen_width / 2 - button_width / 2
     y = screen_height - button_height - tile_size / 2
 
-    # Simple button background
     pygame.draw.rect(
         screen,
         (180, 180, 180),
@@ -197,28 +194,6 @@ def render_mobile_controls():
         (x, y, button_width, button_height),
         3
     )
-
-    if flag_mode:
-        label = "FLAG MODE"
-    else:
-        label = "REVEAL MODE"
-
-    mobile_font = pygame.font.Font(
-        "freesansbold.ttf",
-        max(16, tile_size // 2)
-    )
-
-    text = mobile_font.render(
-        label,
-        True,
-        (0, 0, 0)
-    )
-
-    text_rect = text.get_rect(
-        center=(x + button_width / 2, y + button_height / 2)
-    )
-
-    screen.blit(text, text_rect)
 
     return x, y, button_width, button_height
 
